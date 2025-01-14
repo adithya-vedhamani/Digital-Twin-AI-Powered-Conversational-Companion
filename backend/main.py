@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
@@ -45,6 +46,15 @@ Base.metadata.create_all(bind=engine)
 
 # FastAPI app
 app = FastAPI()
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Pydantic models
 class UserInput(BaseModel):

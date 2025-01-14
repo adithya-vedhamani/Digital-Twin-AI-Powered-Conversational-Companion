@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import axios from "axios";
 
 const AddUser = () => {
@@ -24,24 +24,77 @@ const AddUser = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      <TextField name="name" label="Name" onChange={handleChange} fullWidth />
-      <TextField name="age" label="Age" type="number" onChange={handleChange} fullWidth />
-      <TextField name="sex" label="Sex" onChange={handleChange} fullWidth />
-      <TextField name="location" label="Location" onChange={handleChange} fullWidth />
-      <TextField name="education" label="Education" onChange={handleChange} fullWidth />
-      <TextField
-        name="professional_details"
-        label="Professional Details"
-        multiline
-        rows={4}
-        onChange={handleChange}
-        fullWidth
-      />
-      <Button type="submit" variant="contained">
-        Add User
-      </Button>
-    </Box>
+    <Container maxWidth="sm" sx={{ paddingTop: 5 }}>
+      <Paper elevation={3} sx={{ padding: 4 }}>
+        <Typography variant="h5" align="center" gutterBottom>
+          Add New User
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit}>
+          <TextField
+            name="name"
+            label="Name"
+            value={formData.name}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            name="age"
+            label="Age"
+            type="number"
+            value={formData.age}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            name="sex"
+            label="Sex"
+            value={formData.sex}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            name="location"
+            label="Location"
+            value={formData.location}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            name="education"
+            label="Education"
+            value={formData.education}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            name="professional_details"
+            label="Professional Details"
+            multiline
+            rows={4}
+            value={formData.professional_details}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+          />
+          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+            <Button type="submit" variant="contained" color="primary">
+              Add User
+            </Button>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 

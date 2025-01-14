@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box, Typography, Card, CardContent, Grid } from "@mui/material";
 import axios from "axios";
 
 const Personality = () => {
@@ -29,36 +29,65 @@ const Personality = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      <TextField
-        name="user_id"
-        label="User ID"
-        value={formData.user_id}
-        onChange={(e) => setFormData({ ...formData, user_id: e.target.value })}
-        fullWidth
-      />
-      {formData.entries.map((entry, index) => (
-        <div key={index}>
-          <TextField
-            name="question"
-            label="Question"
-            value={entry.question}
-            onChange={(e) => handleChange(e, index)}
-            fullWidth
-          />
-          <TextField
-            name="response"
-            label="Response"
-            value={entry.response}
-            onChange={(e) => handleChange(e, index)}
-            fullWidth
-          />
-        </div>
-      ))}
-      <Button onClick={addEntry}>Add Entry</Button>
-      <Button type="submit" variant="contained">
-        Submit
-      </Button>
+    <Box sx={{ maxWidth: "600px", margin: "0 auto", padding: 3 }}>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Personality Data Entry
+          </Typography>
+          
+          <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            {/* User ID Input */}
+            <TextField
+              name="user_id"
+              label="User ID"
+              value={formData.user_id}
+              onChange={(e) => setFormData({ ...formData, user_id: e.target.value })}
+              fullWidth
+              variant="outlined"
+              required
+            />
+            
+            {/* Dynamic Question and Response Fields */}
+            {formData.entries.map((entry, index) => (
+              <Grid container spacing={2} key={index}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    name="question"
+                    label="Question"
+                    value={entry.question}
+                    onChange={(e) => handleChange(e, index)}
+                    fullWidth
+                    variant="outlined"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    name="response"
+                    label="Response"
+                    value={entry.response}
+                    onChange={(e) => handleChange(e, index)}
+                    fullWidth
+                    variant="outlined"
+                    required
+                  />
+                </Grid>
+              </Grid>
+            ))}
+            
+            {/* Add Entry and Submit Buttons */}
+            <Box sx={{ display: "flex", gap: 2 }}>
+              <Button onClick={addEntry} variant="outlined" sx={{ flexGrow: 1 }}>
+                Add Entry
+              </Button>
+              <Button type="submit" variant="contained" sx={{ flexGrow: 1 }}>
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
     </Box>
   );
 };
