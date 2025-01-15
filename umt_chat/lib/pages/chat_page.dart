@@ -73,7 +73,7 @@ class _UserListPageState extends State<UserListPage> {
   Future<void> fetchUsers() async {
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.1.4:8000/users/'));
+          await http.get(Uri.parse('http://192.168.1.6:8000/users/'));
       if (response.statusCode == 200) {
         setState(() {
           users = List<Map<String, dynamic>>.from(json.decode(response.body));
@@ -208,12 +208,12 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.indigoAccent,
         title: Center(
           child: Text(
-        "Chat with ${widget.userName} AI",
-        style: TextStyle(
-          fontSize: 26,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+            "Chat with ${widget.userName} AI",
+            style: TextStyle(
+              fontSize: 26,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
