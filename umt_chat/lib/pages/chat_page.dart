@@ -119,7 +119,7 @@ class _ChatPageState extends State<ChatPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.4:8000/simulate/'),
+        Uri.parse('http://192.168.1.6:8000/simulate/'),
         headers: {"Content-Type": "application/json"},
         body: json.encode({"user_id": widget.userId, "message": message}),
       );

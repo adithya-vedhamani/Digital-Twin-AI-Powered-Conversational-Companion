@@ -33,13 +33,12 @@ class _SignupPageState extends State<SignupPage> {
       try {
         final response = await _apiService.createUser(user);
 
-        // Pass userId and name to QuestionnairePage
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => QuestionnairePage(
               userId: response['user_id'],
-              userName: _nameController.text,  // Pass name here
+              userName: _nameController.text,
             ),
           ),
         );
@@ -52,58 +51,161 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(title: Text('Signup')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Name is required' : null,
-              ),
-              TextFormField(
-                controller: _ageController,
-                decoration: InputDecoration(labelText: 'Age'),
-                keyboardType: TextInputType.number,
-                validator: (value) => value!.isEmpty ? 'Age is required' : null,
-              ),
-              TextFormField(
-                controller: _sexController,
-                decoration: InputDecoration(labelText: 'Sex'),
-                validator: (value) => value!.isEmpty ? 'Sex is required' : null,
-              ),
-              TextFormField(
-                controller: _locationController,
-                decoration: InputDecoration(labelText: 'Location'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Location is required' : null,
-              ),
-              TextFormField(
-                controller: _educationController,
-                decoration: InputDecoration(labelText: 'Education'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Education is required' : null,
-              ),
-              TextFormField(
-                controller: _professionalDetailsController,
-                decoration: InputDecoration(labelText: 'Professional Details'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Professional Details are required' : null,
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _signup,
-                child: Text('Sign Up'),
-              ),
-            ],
+      // appBar: AppBar(
+      //   title: Text('Sign Up'),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.indigo,
+      //   elevation: 0,
+      // ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.05,
+          vertical: screenHeight * 0.02,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.indigo.shade300, Colors.indigo.shade600],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: screenHeight * 0.02),
+                Center(
+                  child: Text(
+                    "Welcome!",
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.04,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.01),
+                Center(
+                  child: Text(
+                    "Please fill in the details below to create your account.",
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.02,
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.03),
+                _buildTextField(
+                  controller: _nameController,
+                  labelText: 'Name',
+                  icon: Icons.person,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                _buildTextField(
+                  controller: _ageController,
+                  labelText: 'Age',
+                  icon: Icons.calendar_today,
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                _buildTextField(
+                  controller: _sexController,
+                  labelText: 'Sex',
+                  icon: Icons.wc,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                _buildTextField(
+                  controller: _locationController,
+                  labelText: 'Location',
+                  icon: Icons.location_on,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                _buildTextField(
+                  controller: _educationController,
+                  labelText: 'Education',
+                  icon: Icons.school,
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                _buildTextField(
+                  controller: _professionalDetailsController,
+                  labelText: 'Professional Details',
+                  icon: Icons.work,
+                ),
+                SizedBox(height: screenHeight * 0.03),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _signup,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.2,
+                        vertical: screenHeight * 0.015,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.indigo,
+                      textStyle: TextStyle(
+                        fontSize: screenHeight * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text('Sign Up'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    IconData? icon,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          labelText,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(height: 8),
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            prefixIcon: icon != null ? Icon(icon, color: Colors.indigo) : null,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.indigo),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.indigo, width: 2),
+            ),
+          ),
+          keyboardType: keyboardType,
+          validator: (value) =>
+              value!.isEmpty ? '$labelText is required' : null,
+        ),
+      ],
     );
   }
 }

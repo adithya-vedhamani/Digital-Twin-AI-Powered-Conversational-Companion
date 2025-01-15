@@ -126,7 +126,7 @@ def get_users():
     session = SessionLocal()
     try:
         users = session.query(User).all()
-        return [{"id": user.id, "name": user.name} for user in users]
+        return [{"id": user.id, "name": user.name, "age": user.age, "sex": user.sex, "location":user.location, "education":user.education, "professional_details":user.professional_details} for user in users]
     finally:
         session.close()
 
