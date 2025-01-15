@@ -38,6 +38,16 @@ class _UserListPageState extends State<UserListPage> {
     return detail != null && detail.isNotEmpty ? detail : placeholder;
   }
 
+  // Function to decide avatar color based on gender
+  Color _getAvatarColor(String gender) {
+    if (gender.toLowerCase() == 'male') {
+      return Colors.blue; // Blue for male
+    } else if (gender.toLowerCase() == 'female') {
+      return Colors.pink; // Pink for female
+    }
+    return Colors.grey; // Default color
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,11 +82,11 @@ class _UserListPageState extends State<UserListPage> {
                   Center(
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: Colors.indigoAccent[100],
+                      backgroundColor: _getAvatarColor(user['sex']),
                       child: Icon(
                         Icons.person,
                         size: 50,
-                        color: Colors.indigoAccent,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -92,65 +102,36 @@ class _UserListPageState extends State<UserListPage> {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      _getDetailOrPlaceholder(
-                          user['age']?.toString(), 'No age details available'),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: _buildUserDetail('Age:', user['age']?.toString(),
+                            'No age details available'),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      _getDetailOrPlaceholder(
-                          user['sex'], 'No education details available'),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
+                      Expanded(
+                        child: _buildUserDetail('Education:', user['education'],
+                            'No education details available'),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      _getDetailOrPlaceholder(
-                          user['location'], 'No location details available'),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: _buildUserDetail('Location:', user['location'],
+                            'No location details available'),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      _getDetailOrPlaceholder(
-                          user['education'], 'No eductaion details available'),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
+                      Expanded(
+                        child: _buildUserDetail(
+                            'Sex:', user['sex'], 'No sex details available'),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      _getDetailOrPlaceholder(user['professional_details'],
-                          'No professional details available'),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  _buildUserDetail(
+                      'Professional Details:',
+                      user['professional_details'],
+                      'No professional details available'),
                   SizedBox(height: 16),
                   Center(
                     child: ElevatedButton(
@@ -187,6 +168,20 @@ class _UserListPageState extends State<UserListPage> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  // Helper function to build user detail widgets with a label
+  Widget _buildUserDetail(String label, String? value, String placeholder) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Text(
+        '$label ${_getDetailOrPlaceholder(value, placeholder)}',
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.grey[600],
         ),
       ),
     );
