@@ -151,7 +151,7 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.indigo,
+                      foregroundColor: Colors.indigoAccent,
                       textStyle: TextStyle(
                         fontSize: screenHeight * 0.025,
                         fontWeight: FontWeight.bold,

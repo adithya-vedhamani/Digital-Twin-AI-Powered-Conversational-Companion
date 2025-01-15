@@ -9,6 +9,28 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.indigo,
+        hintColor: Colors.indigoAccent,
+        scaffoldBackgroundColor: Colors.grey[200],
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.indigo,
+          titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.indigoAccent,
+            textStyle: TextStyle(fontSize: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontSize: 16),
+          bodyMedium: TextStyle(fontSize: 14, color: Colors.grey[700]),
+        ),
+      ),
       home: HomePage(),
     );
   }
@@ -22,13 +44,12 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // Navigate to the User List Page
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => UserListPage()),
             );
           },
-          child: Text("Go to Chat"), // THIS BUTTON NOW GOES TO UserListPage
+          child: Text("Go to Chat"),
         ),
       ),
     );
@@ -74,20 +95,32 @@ class _UserListPageState extends State<UserListPage> {
           : ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(users[index]['name']),
-                  onTap: () {
-                    // Navigate to Chat Page for the selected user
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChatPage(
-                          userId: users[index]['id'],
-                          userName: users[index]['name'],
-                        ),
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  elevation: 2,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.indigo,
+                      child: Text(
+                        users[index]['name'][0].toUpperCase(),
+                        style: TextStyle(color: Colors.white),
                       ),
-                    );
-                  },
+                    ),
+                    title: Text(users[index]['name']),
+                    trailing:
+                        Icon(Icons.chat_bubble, color: Colors.indigoAccent),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatPage(
+                            userId: users[index]['id'],
+                            userName: users[index]['name'],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),
@@ -107,13 +140,13 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
-  List<String> messages = [];
+  List<Map<String, String>> messages = [];
 
   void sendMessage(String message) async {
     if (message.trim().isEmpty) return;
 
     setState(() {
-      messages.add("You: $message");
+      messages.add({"type": "sent", "message": message});
     });
     _messageController.clear();
 
@@ -127,31 +160,72 @@ class _ChatPageState extends State<ChatPage> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          messages.add("${widget.userName} AI: ${data['response']}");
+          messages.add({"type": "received", "message": data['response']});
         });
       } else {
         setState(() {
-          messages.add("Error: Unable to fetch response");
+          messages
+              .add({"type": "error", "message": "Unable to fetch response"});
         });
       }
     } catch (e) {
       setState(() {
-        messages.add("Error: $e");
+        messages.add({"type": "error", "message": e.toString()});
       });
     }
+  }
+
+  Widget _buildMessage(String type, String message) {
+    bool isSent = type == "sent";
+    return Align(
+      alignment: isSent ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: EdgeInsets.all(12),
+        constraints:
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
+        decoration: BoxDecoration(
+          color: isSent ? Colors.indigo : Colors.indigoAccent.shade100,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.circular(isSent ? 16 : 0),
+            bottomRight: Radius.circular(isSent ? 0 : 16),
+          ),
+        ),
+        child: Text(
+          message,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Chat with ${widget.userName} AI")),
+      appBar: AppBar(
+        backgroundColor: Colors.indigoAccent,
+        title: Center(
+          child: Text(
+        "Chat with ${widget.userName} AI",
+        style: TextStyle(
+          fontSize: 26,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
+              reverse: true,
               itemCount: messages.length,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(messages[index]));
+                final message = messages[messages.length - index - 1];
+                return _buildMessage(message['type']!, message['message']!);
               },
             ),
           ),
@@ -162,14 +236,26 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(hintText: "Type a message"),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: "Type a message",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () {
-                    sendMessage(_messageController.text);
-                  },
+                SizedBox(width: 8),
+                CircleAvatar(
+                  backgroundColor: Colors.indigoAccent,
+                  child: IconButton(
+                    icon: Icon(Icons.send, color: Colors.white),
+                    onPressed: () {
+                      sendMessage(_messageController.text);
+                    },
+                  ),
                 ),
               ],
             ),

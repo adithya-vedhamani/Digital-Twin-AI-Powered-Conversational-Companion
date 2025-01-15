@@ -52,8 +52,17 @@ class _UserListPageState extends State<UserListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select User to Chat"),
         backgroundColor: Colors.indigoAccent,
+        title: Center(
+          child: Text(
+            "AI Companions",
+            style: TextStyle(
+              fontSize: 26,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),

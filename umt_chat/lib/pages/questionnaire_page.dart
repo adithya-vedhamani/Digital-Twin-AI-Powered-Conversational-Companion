@@ -16,10 +16,21 @@ class QuestionnairePage extends StatefulWidget {
 class _QuestionnairePageState extends State<QuestionnairePage> {
   final _questionController = TextEditingController();
   final List<String> questions = [
-    "How are you feeling today?",
-    "What motivates you the most?",
-    "What is your favorite hobby?",
-    "Describe yourself in one word."
+    "How do you usually spend your weekends?",
+    "What qualities do you value most in a partner?",
+    "How do you express affection or love?",
+    "What is your idea of a perfect date?",
+    "How important is personal growth in a relationship?",
+    "What kind of communication style do you prefer in a partner?",
+    "How do you handle disagreements in a relationship?",
+    "What role does humor play in your relationships?",
+    "What hobbies or activities do you enjoy sharing with others?",
+    "How do you balance independence and togetherness in a relationship?",
+    "What is your favorite way to relax after a long day?",
+    "How important is it to align on long-term goals in a relationship?",
+    "How do you celebrate special occasions like birthdays or anniversaries?",
+    "What is your approach to handling finances in a relationship?",
+    "What does trust mean to you in a relationship?"
   ];
   int currentQuestionIndex = 0;
   Map<String, String> responses = {};
