@@ -168,3 +168,75 @@ Generate a response that mimics the user's communication style.
         return {"response": response.choices[0].message.content}
     finally:
         session.close()
+
+@app.delete("/users/{user_id}/")
+def delete_user(user_id: int):
+    """Delete a user by their ID."""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        session.delete(user)
+        session.commit()
+        return {"message": f"User with ID {user_id} deleted successfully"}
+    finally:
+        session.close()
+
+
+@app.get("/users/{user_id}/")
+def get_user(user_id: int):
+    """Get a single user by their ID."""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return {
+            "id": user.id,
+            "name": user.name,
+            "age": user.age,
+            "sex": user.sex,
+            "location": user.location,
+            "education": user.education,
+            "professional_details": user.professional_details,
+        }
+    finally:
+        session.close()
+
+
+@app.put("/users/{user_id}/")
+def update_user(user_id: int, user_update: UserInput):
+    """Update a user's details by their ID."""
+    session = SessionLocal()
+    try:
+        user = session.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        for key, value in user_update.dict().items():
+            setattr(user, key, value)
+        
+        session.commit()
+        session.refresh(user)
+        return {"message": f"User with ID {user_id} updated successfully"}
+    finally:
+        session.close()
+
+
+@app.delete("/personality/{user_id}/")
+def delete_personality_entries(user_id: int):
+    """Delete all personality entries for a given user."""
+    session = SessionLocal()
+    try:
+        entries = session.query(Personality).filter(Personality.user_id == user_id).all()
+        if not entries:
+            raise HTTPException(status_code=404, detail="No personality entries found for this user")
+        
+        for entry in entries:
+            session.delete(entry)
+        session.commit()
+        return {"message": f"All personality entries for user ID {user_id} deleted successfully"}
+    finally:
+        session.close()
+
