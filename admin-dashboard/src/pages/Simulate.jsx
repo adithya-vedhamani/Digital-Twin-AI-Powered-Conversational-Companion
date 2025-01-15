@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import axios from "axios";
 
@@ -8,7 +8,7 @@ const Simulate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://192.168.1.4:8000/simulate/", formData).then((res) => {
+    axios.post("http://192.168.1.6:8000/simulate/", formData).then((res) => {
       setResponse(res.data.response);
     });
   };

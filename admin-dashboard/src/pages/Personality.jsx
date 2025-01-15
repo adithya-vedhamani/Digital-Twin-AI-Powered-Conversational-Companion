@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { TextField, Button, Box, Typography, Card, CardContent, Grid } from "@mui/material";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ const Personality = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://192.168.1.4:8000/personality/", formData).then(() => {
+    axios.post("http://192.168.1.6:8000/personality/", formData).then(() => {
       alert("Personality data added successfully");
     });
   };
