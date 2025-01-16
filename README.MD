@@ -2,6 +2,8 @@
 
  An application that creates a "Digital Twin" to mimic a user's conversational style. It uses AI to respond to incoming connection requests by learning from the user's communication preferences and style. The app includes user onboarding, a personality questionnaire, and AI-driven message handling.
 
+![Flowchart](images/flow_chart.png)
+
 ## Features
 
 ### Frontend (Flutter)
