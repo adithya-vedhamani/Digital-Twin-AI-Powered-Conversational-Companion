@@ -1,0 +1,116 @@
+matchmaking_questions = [
+    "How do you usually spend your weekends?",
+    "What qualities do you value most in a partner?",
+    "How do you express affection or love?",
+    "What is your idea of a perfect date?",
+    "How important is personal growth in a relationship?",
+    "What kind of communication style do you prefer in a partner?",
+    "How do you handle disagreements in a relationship?",
+    "What role does humor play in your relationships?",
+    "What hobbies or activities do you enjoy sharing with others?",
+    "How do you balance independence and togetherness in a relationship?",
+    "What is your favorite way to relax after a long day?",
+    "How important is it to align on long-term goals in a relationship?",
+    "How do you celebrate special occasions like birthdays or anniversaries?",
+    "What is your approach to handling finances in a relationship?",
+    "What does trust mean to you in a relationship?"
+]
+
+
+
+Five different personality types for the 15 matchmaking questions.
+
+Personality Types:
+Romantic Dreamer - Values deep emotional connections and sentimental gestures.
+Adventurous Explorer - Thrives on spontaneity, excitement, and new experiences.
+Practical Realist - Values stability, logic, and clear communication.
+Empathetic Listener - Focuses on understanding and nurturing relationships.
+Independent Thinker - Prefers autonomy and intellectual connection.
+
+personalities = {
+    "Romantic Dreamer": [
+        "Spending quality time with loved ones or reading poetry.",
+        "Kindness, loyalty, and shared dreams.",
+        "Through heartfelt gestures like notes or gifts.",
+        "A candlelit dinner or stargazing night.",
+        "Very important—growth strengthens the bond.",
+        "Open and honest conversations.",
+        "By finding common ground and compromising.",
+        "It's crucial; laughter keeps love alive.",
+        "Sharing hobbies like painting or cooking.",
+        "Togetherness is more important than independence.",
+        "Listening to music or journaling.",
+        "Extremely important for mutual understanding.",
+        "Planning surprises to make them feel special.",
+        "It should be a joint decision, built on trust.",
+        "Mutual respect, honesty, and openness."
+    ],
+    "Adventurous Explorer": [
+        "Exploring new places or engaging in outdoor activities.",
+        "Spontaneity, humor, and a sense of adventure.",
+        "With spontaneous actions or playful gestures.",
+        "An unexpected road trip or a thrilling activity.",
+        "Important, as long as it doesn't feel restrictive.",
+        "Direct and engaging conversations.",
+        "By giving space and revisiting when emotions settle.",
+        "It's a way to bond and lighten up tense moments.",
+        "Anything active like hiking or trying new cuisines.",
+        "Balance is key, but independence matters slightly more.",
+        "Going for a run or trying something new.",
+        "Somewhat important—shared experiences matter more.",
+        "Celebrating with a fun outing or party.",
+        "Splitting responsibilities and making joint decisions.",
+        "Trust is about being reliable and giving freedom."
+    ],
+    "Practical Realist": [
+        "Organizing or catching up on tasks and hobbies.",
+        "Honesty, reliability, and shared goals.",
+        "Through practical actions like helping them out.",
+        "A straightforward dinner with good conversation.",
+        "Very important—it ensures long-term alignment.",
+        "Clear and straightforward communication.",
+        "By addressing it logically and calmly.",
+        "It's nice but not the core of the relationship.",
+        "Hobbies that involve building or fixing things.",
+        "Balance is key—both independence and togetherness.",
+        "Reading or working on a project.",
+        "It's vital for staying on the same page.",
+        "A meaningful but simple acknowledgment of the day.",
+        "Clear agreements and shared responsibility.",
+        "Trust is earned through consistency and actions."
+    ],
+    "Empathetic Listener": [
+        "Volunteering or spending time connecting with people.",
+        "Empathy, patience, and mutual understanding.",
+        "Through listening and being emotionally available.",
+        "A heartfelt conversation over coffee or tea.",
+        "Extremely important—it fosters emotional connection.",
+        "Gentle and open discussions.",
+        "By understanding and validating emotions.",
+        "A wonderful way to bring joy and connection.",
+        "Activities that promote bonding, like cooking together.",
+        "Togetherness matters more, but independence is respected.",
+        "Meditation or talking with someone close.",
+        "Critical—relationships thrive on shared goals.",
+        "Thoughtful gifts or gestures that show care.",
+        "Discussing and aligning expectations.",
+        "Trust is about emotional safety and consistency."
+    ],
+    "Independent Thinker": [
+        "Spending time alone reading or learning something new.",
+        "Intelligence, independence, and mutual respect.",
+        "Through meaningful conversations and thoughtful acts.",
+        "A discussion on a topic of shared interest.",
+        "Moderately important—personal growth is the priority.",
+        "Intellectual and direct discussions.",
+        "By analyzing the situation and proposing solutions.",
+        "Not essential, but it adds value to interactions.",
+        "Activities that challenge the mind, like puzzles.",
+        "Independence is more important, but balance is appreciated.",
+        "Engaging in a thought-provoking activity.",
+        "Important, but more about intellectual alignment.",
+        "Acknowledging it in a unique and creative way.",
+        "Everyone managing their own finances independently.",
+        "Trust is built through intellectual honesty and respect."
+    ]
+}
