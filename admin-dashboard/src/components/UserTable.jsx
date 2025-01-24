@@ -27,7 +27,7 @@ const UserTable = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://192.168.1.6:8000/users/");
+        const response = await axios.get("http://10.123.19.86:8000/users/");
         setUsers(response.data);
         setError(null);
       } catch (err) {

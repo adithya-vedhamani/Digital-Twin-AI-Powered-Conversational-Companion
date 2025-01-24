@@ -20,7 +20,7 @@ const UpdateUser = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://192.168.1.6:8000/users/${formData.id}`, formData)
+      .put(`http://10.123.19.86:8000/users/${formData.id}`, formData)
       .then(() => {
         alert("User updated successfully");
       })

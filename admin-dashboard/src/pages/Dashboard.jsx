@@ -79,7 +79,7 @@ const Dashboard = () => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://192.168.1.6:8000/users/");
+        const response = await axios.get("http://10.123.19.86:8000/users/");
         const { users, active_users, new_users_today } = response.data;
         setStats({
           totalUsers: users ? users.length : 0,

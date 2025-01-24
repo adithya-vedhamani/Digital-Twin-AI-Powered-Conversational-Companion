@@ -50,7 +50,7 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.6:8000/personality/'),
+        Uri.parse('http://10.123.19.86:8000/personality/'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );

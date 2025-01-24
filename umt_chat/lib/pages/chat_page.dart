@@ -72,8 +72,7 @@ class _UserListPageState extends State<UserListPage> {
 
   Future<void> fetchUsers() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://192.168.1.6:8000/users/'));
+      final response = await http.get(Uri.parse('http://.168.1.6:8000/users/'));
       if (response.statusCode == 200) {
         setState(() {
           users = List<Map<String, dynamic>>.from(json.decode(response.body));
@@ -152,7 +151,7 @@ class _ChatPageState extends State<ChatPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.6:8000/simulate/'),
+        Uri.parse('http://10.123.19.86:8000/simulate/'),
         headers: {"Content-Type": "application/json"},
         body: json.encode({"user_id": widget.userId, "message": message}),
       );

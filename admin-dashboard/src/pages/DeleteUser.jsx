@@ -12,7 +12,7 @@ const DeleteUser = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://192.168.1.6:8000/users/${userId}`)
+      .delete(`http://10.123.19.86:8000/users/${userId}`)
       .then(() => {
         alert("User deleted successfully");
       })

@@ -8,7 +8,7 @@ const Simulate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://192.168.1.6:8000/simulate/", formData).then((res) => {
+    axios.post("http://10.123.19.86:8000/simulate/", formData).then((res) => {
       setResponse(res.data.response);
     });
   };

@@ -23,7 +23,7 @@ const Personality = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://192.168.1.6:8000/personality/", formData).then(() => {
+    axios.post("http://10.123.19.86:8000/personality/", formData).then(() => {
       alert("Personality data added successfully");
     });
   };
