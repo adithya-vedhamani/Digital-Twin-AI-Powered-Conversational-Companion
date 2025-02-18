@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:umt_chat/models/user.dart';
 import 'package:umt_chat/models/personality.dart';
+import '../env.dart'; // Import the Env class
 
 class ApiService {
-  final String baseUrl =
-      "http://10.123.19.86:8000"; // Update to your FastAPI URL
+  final String baseUrl = Env.baseUrl; // Update to your FastAPI URL
 
   // Create User
   Future<Map<String, dynamic>> createUser(User user) async {

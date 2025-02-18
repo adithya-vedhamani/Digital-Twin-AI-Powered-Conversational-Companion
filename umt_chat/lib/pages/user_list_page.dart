@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'chat_page.dart'; // Import the ChatPage
+import '../env.dart'; // Import the Env class
 
 class UserListPage extends StatefulWidget {
   final int userId;
@@ -22,8 +23,7 @@ class _UserListPageState extends State<UserListPage> {
   }
 
   Future<void> fetchUsers() async {
-    final response =
-        await http.get(Uri.parse('http://10.123.19.86:8000/users/'));
+    final response = await http.get(Uri.parse('${Env.baseUrl}/users/'));
     if (response.statusCode == 200) {
       setState(() {
         users = List<Map<String, dynamic>>.from(json.decode(response.body));

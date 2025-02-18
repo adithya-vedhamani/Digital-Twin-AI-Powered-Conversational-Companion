@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'user_list_page.dart';
+import '../env.dart'; // Import the Env class
 
 class QuestionnairePage extends StatefulWidget {
   final int userId;
@@ -50,7 +51,7 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://10.123.19.86:8000/personality/'),
+        Uri.parse('${Env.baseUrl}/personality/'),
         headers: {"Content-Type": "application/json"},
         body: body,
       );

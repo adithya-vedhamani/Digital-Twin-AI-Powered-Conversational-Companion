@@ -1,0 +1,2 @@
+/Users/adithyavedhamani/Codes/umt/umt_chat/android/app/.cxx/Debug/2b1f2r3e/x86/CMakeFiles/edit_cache.dir
+/Users/adithyavedhamani/Codes/umt/umt_chat/android/app/.cxx/Debug/2b1f2r3e/x86/CMakeFiles/rebuild_cache.dir
