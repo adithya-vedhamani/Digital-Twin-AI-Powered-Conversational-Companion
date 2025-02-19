@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const DeleteUser = () => {
   const [userId, setUserId] = useState("");
@@ -12,7 +13,7 @@ const DeleteUser = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://10.123.19.86:8000/users/${userId}`)
+      .delete(`${API_BASE_URL}/users/${userId}`)
       .then(() => {
         alert("User deleted successfully");
       })

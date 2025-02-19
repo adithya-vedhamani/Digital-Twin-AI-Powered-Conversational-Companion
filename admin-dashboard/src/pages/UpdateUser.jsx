@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography, Container, Paper, Grid, Divider } from "@mui/material";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const UpdateUser = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const UpdateUser = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://10.123.19.86:8000/users/${formData.id}`, formData)
+      .put(`${API_BASE_URL}/users/${formData.id}`, formData)
       .then(() => {
         alert("User updated successfully");
       })

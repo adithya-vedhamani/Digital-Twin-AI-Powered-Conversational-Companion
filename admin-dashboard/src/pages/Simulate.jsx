@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const Simulate = () => {
   const [formData, setFormData] = useState({ user_id: "", message: "" });
@@ -8,7 +9,7 @@ const Simulate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://10.123.19.86:8000/simulate/", formData).then((res) => {
+    axios.post(`${API_BASE_URL}/simulate/`, formData).then((res) => {
       setResponse(res.data.response);
     });
   };

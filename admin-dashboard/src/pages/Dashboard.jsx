@@ -19,6 +19,7 @@ import {
 import UserTable from "../components/UserTable";
 import axios from "axios";
 import PropTypes from 'prop-types';
+import API_BASE_URL from "../config";
 
 const StatCard = ({ icon, title, value, color }) => {
   const Icon = icon;
@@ -79,7 +80,7 @@ const Dashboard = () => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://10.123.19.86:8000/users/");
+        const response = await axios.get(`${API_BASE_URL}/users/`);
         const { users, active_users, new_users_today } = response.data;
         setStats({
           totalUsers: users ? users.length : 0,

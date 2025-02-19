@@ -1,6 +1,7 @@
 import  { useState } from "react";
 import { TextField, Button, Box, Typography, Card, CardContent, Grid } from "@mui/material";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const Personality = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Personality = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://10.123.19.86:8000/personality/", formData).then(() => {
+    axios.post(`${API_BASE_URL}/personality/`, formData).then(() => {
       alert("Personality data added successfully");
     });
   };

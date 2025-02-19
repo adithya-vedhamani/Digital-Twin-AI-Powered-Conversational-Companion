@@ -14,6 +14,7 @@ import {
   useMediaQuery
 } from "@mui/material";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
@@ -27,7 +28,7 @@ const UserTable = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://10.123.19.86:8000/users/");
+        const response = await axios.get(`${API_BASE_URL}/users/`);
         setUsers(response.data);
         setError(null);
       } catch (err) {
